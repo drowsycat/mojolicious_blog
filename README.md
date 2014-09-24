@@ -3,25 +3,15 @@ DESCRIPTION
 To work with this repository you need to install MySQL, Perl and such modules:
 
     Mojolicious;
-
     PSGI;
-
     Plack;
-
     DBIx::Simple;
- 
     SQL::Abstract;
-
     Mojolicious::Plugin::BootstrapPagination;
-
     Mojolicious::Plugin::JSONConfig;
-
     Image::Magick;
-
     Date::DayOfWeek;
-
     XML::RSS
-
 
 Clone this repository. Than go to directory where repository is placed and type in command line:
 `$ morbo my_blog.pl`
