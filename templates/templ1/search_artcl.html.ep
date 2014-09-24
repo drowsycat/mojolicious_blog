@@ -1,0 +1,115 @@
+% layout 'templ1/bootstrap';
+% use Transliter;
+
+% my $admin_check = $self->session('admin');
+
+<div class="row">
+    <div class="col-md-8">
+    <h1>Perl і не тільки</h1>
+    </div>
+    <div class="col-md-4">
+        %= form_for 'search_artcl' => (method => 'post', class => 'form-search') => begin
+        <div class="input-group">
+        <input type="text" class="form-control" name="search_frase">
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-default" name="suchen">
+            <span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+        % end
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    <img src="/img/logo_img.jpg" width="970">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    
+<%= include 'templ1/menu' =%>
+    
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9" id="articl_box">
+    %== $self->lang_config->{'you_suchen'}->{$language}
+    <b class="label_style"><%= $search_frase_begin %></b> <%#= $search_frase %>
+    <hr>
+% if($size == 1){
+    % foreach(@$search_result){
+    
+        % my @strings = split(/(\.\s?)/, $_->{'search_text'});
+        % INNER:
+        % foreach my $data(@strings){
+        %    if($data =~ /.*($search_frase).*/gi || $data =~ /($search_frase)/gi){
+        %        $data =~ s/$1/<b class=\"label_style\">$search_frase<\/b>/g;
+        %        $_->{'search_text'} = $data;
+        %    last INNER;
+        %    }else{
+        %       $_->{'search_text'} = 'no';
+        %    }
+        % }
+        % if(!$_->{'url'} && ($length < 3)){
+            %= $self->lang_config->{'not_enough_chars'}->{$language}
+        % }elsif($_->{'search_text'} eq 'no' && scalar(@$search_result) == 1){
+            %= $self->lang_config->{'no_search_result'}->{$language}
+        % }elsif($_->{'search_text'} eq 'no'){
+        
+        % }else{
+        <a href="<%= $_->{'url'} %>"><%= $_->{'head'} %></a>
+                <br>        
+                <%== $_->{'search_text'} %>
+        <hr>
+        % }
+    % }
+% }else{
+    % my @words = split(/ /, $search_frase);
+    % foreach(@$search_result){ 
+        % my @strings = split(/(\.\s?)/, $_->{'search_text'});
+        % INNER:
+        % foreach my $data(@strings){
+        %    if($data =~ /.*($words[0]).+($words[1]).+($words[2]).+($words[3]).*/gi){
+        %       $data =~ s/(.*)($words[0])(.+)($words[1])(.+)($words[2])(.+)($words[3])(.*)/$1<b class=\"label_style\">$2<\/b>$3<b class=\"label_style\">$4<\/b>$5<b class=\"label_style\">$6<\/b>$7<b class=\"label_style\">$8<\/b>$9/gi;
+        %       $_->{'search_text'} = $data;
+        %       last INNER;
+        %    }elsif($data =~ /.*($words[0]).+($words[1]).+($words[2]).*/gi){
+        %       $data =~ s/(.*)($words[0])(.+)($words[1])(.+)($words[2])(.*)/$1<b class=\"label_style\">$2<\/b>$3<b class=\"label_style\">$4<\/b>$5<b class=\"label_style\">$6<\/b>$7/gi;
+        %       $_->{'search_text'} = $data;
+        %       last INNER;
+        %    }elsif($data =~ /.*($words[0]).+($words[1]).*/gi){
+        %       $data =~ s/(.*)($words[0])(.+)($words[1])(.*)/$1<b class=\"label_style\">$2<\/b>$3<b class=\"label_style\">$4<\/b>$5/gi;
+        %       $_->{'search_text'} = $data;
+        %       last INNER;
+        %    }elsif($data =~ /.*($words[0]).*/gi){
+        %       $data =~ s/(.*)($words[0])(.*)/$1<b class=\"label_style\">$2<\/b>$3/gi;
+        %       $_->{'search_text'} = $data;
+        %       last INNER;
+        %    }else{
+        %       $_->{'search_text'} = 'no';
+        %    }
+        % }
+        % if($_->{'search_text'} eq 'no'){
+            
+        % }else{
+        <a href="<%= $_->{'url'} %>"><%= $_->{'head'} %></a>
+                <br>        
+                <%== $_->{'search_text'} %>
+        <hr>
+        % }
+    % }
+
+% }
+    </div>
+
+    <div class="col-md-3">
+    <%= include 'authorize' =%>
+    <%= include 'templ1/rubric_list' %>
+    <%= include 'templ1/archive_menu' =%>
+    <%= include 'templ1/meta_menu' %>
+    </div>
+    
+</div>

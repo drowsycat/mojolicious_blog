@@ -1,0 +1,46 @@
+% layout 'bootstrap';
+
+<div class="row">
+    <div class="col-md-12">
+    <img src="/img/logo_img.jpg" width="990">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    
+<nav class="navbar navbar-default" role="navigation">
+
+<div class="container-fluid">
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<ul class="nav navbar-nav">
+<li><a href="/main/">про проект</a></li>
+<li><a href="/main/percij_rozdil/">перший розділ</a></li>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">перший розділ 2 <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+<li><a href="/main/percij_rozdil_2/percij_1_1/">перший 1_1</a></li>
+<li><a href="/main/percij_rozdil_2/percij_1_2/">перший 1_2</a></li>
+</ul>
+</li>
+        <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">перший розділ 3 <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+<li><a href="/main/percij_rozdil_3/percij_rozdil_3_1/">перший розділ 3_1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+</nav>
+    
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">.col-md-9</div>
+    <div class="col-md-1">.col-md-1</div>
+</div>

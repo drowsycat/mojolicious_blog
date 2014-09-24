@@ -1,0 +1,31 @@
+% layout 'layout_admin';
+
+<div id="body_innr_adm">
+<h3 style="color:#428BCA">
+<%= link_to $header => 'manager' %>
+</h3>
+
+<div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <p class="mr_menu_item">
+            <a href="/menu_manage">Menu</a>
+            </p>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+
+<hr>
+<!----------------------------->
+<div>
+%== $menu
+</div>
+<!----------------------------->
+
+    <div class="row">
+        <div class="col-md-1">
+        %== $menu_form
+        </div>
+
+    </div>
+</div>

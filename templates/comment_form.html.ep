@@ -1,0 +1,58 @@
+
+%= form_for $self->req->url => (method => 'post') => begin
+<hr>
+
+% if( $self->session('client') ){
+%#= $self->session('client')->[1]
+<h3 class="label_style"><%= $self->lang_config->{'labels'}->{$language}->{'responses'} %> :</h3>
+% }
+% else{ 
+
+<b style="color:red"><%= $message_of_comment %></b> <%#= Повідомлення про неправильний логін або пароль ############## %>
+%= hidden_field 'redirect_to' => $self->req->url
+<%= $self->lang_config->{'buttons'}->{$language}->{'login'} %>: 
+<b style="color:red"><%= $log_in_err %></b>
+<br>
+<div class="row">
+    <div class="col-xs-8 col-sm-4">
+%= text_field 'log_in', class => 'form-control input-sm', id => 'auth_form'
+    </div>
+    <div class="col-xs-8 col-sm-8"></div>
+</div>
+
+<%= $self->lang_config->{'buttons'}->{$language}->{'passw'} %>: 
+<b style="color:red"><%= $passw_err %></b>
+<br>
+<div class="row">
+    <div class="col-xs-8 col-sm-4">
+%= password_field 'passw', class => 'form-control input-sm', id => 'auth_form'
+    </div>
+    <div class="col-xs-8 col-sm-8"></div>
+
+</div>
+
+<div class="row">  
+    <div class="col-xs-1 col-sm-1">  
+    %= submit_button $self->lang_config->{'buttons'}->{$language}->{'register'}, name => 'registration', class => 'btn btn-default btn-sm', id => 'enter_button'
+    </div>
+</div>
+% }
+
+<br>
+%= hidden_field 'page_id' => $content->[0]->{'id'}
+% if( $self->session('client') ){
+    <%= $self->lang_config->{'labels'}->{$language}->{'response_from'} %> <b class="nickname"><%= $self->session('client')->[1] %></b>:
+% }else{
+<%= $self->lang_config->{'labels'}->{$language}->{'response'} %>:
+% }
+<b style="color:red"><%= $response_err %></b>
+<br>
+%= text_area 'response' , class => 'form-control', rows => 5, cols => 84, id => 'textar'
+%= submit_button $self->lang_config->{'buttons'}->{$language}->{'send'}, name => 'send_respons', class => 'btn btn-default btn-sm active', id => 'enter_button'
+
+% end
+
+<%#= Вивід коментарів ---------------------------------- %>
+
+%== $comments_tree
+<%#= Кінець ---------------------------------- %>

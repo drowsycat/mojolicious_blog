@@ -1,0 +1,42 @@
+% layout 'bootstrap';
+
+<div style="margin:200px auto; width:30%; text-align:center">
+%= form_for 'access' => (method => 'post') => begin
+<br>
+<h3 style="color:#428BCA"><%= $title %></h3><br>
+% if ( $message ) {
+    <b style="color:#428BCA"><%== $message %></b><br>
+    %= link_to $self->lang_config->{'labels'}->{$language}->{'try_again'} => 'dbaccess'
+    <br><br>
+  % }
+%#= hidden_field 'language' => $language
+%#= hidden_field 'redirect_to' => $redirect_to
+<%= $self->lang_config->{'buttons'}->{$language}->{'login'} %>: 
+<b style="color:red">
+<%= $login_err %>
+</b>
+<br>
+%= text_field 'login', class => 'form-control'
+<br>
+<%= $self->lang_config->{'buttons'}->{$language}->{'passw'} %>: 
+<b style="color:red">
+<%= $pass_err %>
+</b>
+<br>
+%= password_field 'pass', , class => 'form-control'
+<br>
+Email: 
+<b style="color:red">
+<%= $email_err %>
+</b>
+<br>
+%= text_field 'email', , class => 'form-control'
+<br><br>
+%#= submit_button $self->lang_config->{'sevice_frase'}->{'buttons'}->{$language}->{'register'}, name => 'register', id => 'upload_button'
+%#= input_tag 'reset', type => 'reset', id => 'upload_button'
+%= submit_button $self->lang_config->{'buttons'}->{$language}->{'create'} , name => 'access', class => 'btn btn-default'
+%= input_tag 'reset', type => 'reset', class => 'btn btn-warning'
+% end
+
+</div>
+<hr>

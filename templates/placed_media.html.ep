@@ -1,0 +1,10 @@
+<b>Placed media: </b>
+<br>
+% foreach my $media(@$media_arr){
+    % my $extens = (split(/\./, $media->{'file'}))[-1]; 
+    <img src="<%= $self->top_config->{'path_to_icon'}->{$extens} %>">
+    <%= $media->{'path'}.'/'.$media->{'file'} %>
+--------------
+%= check_box delete_doc => $media->{'file'} 
+delete<br>
+%}

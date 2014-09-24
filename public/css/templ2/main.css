@@ -1,0 +1,274 @@
+body{
+BACKGROUND-IMAGE: url(/img/kosa.jpg); 
+}
+#body_innr{
+background-color:#ffffff;
+width:1042px;
+margin:20px auto;
+padding:4px;
+border-width: 2px;
+border-color: #DFDFDF;
+border-style: solid;
+-moz-border-radius: 4px;
+border-radius: 4px    
+}
+#body_innr_adm{
+background-color:#ffffff;
+text-align:center;
+width:1042px;
+margin:20px auto;
+padding:4px;
+border-width: 2px;
+border-color: #DFDFDF;
+border-style: solid;
+-moz-border-radius: 4px;
+border-radius: 4px    
+}
+#body_innr_article{
+background-color:#ffffff;
+text-align:center;
+width:1070px;
+margin:20px auto;
+padding:4px;
+border-width: 2px;
+border-color: #DFDFDF;
+border-style: solid;
+-moz-border-radius: 4px;
+border-radius: 4px    
+}
+#activ_menu{
+background-color:green;
+}
+#content{
+margin:15px;
+}
+#masterroom_menu{
+border-right-width: thin;
+border-top-width: 0px;
+border-left-width: 0px;
+border-bottom-width: 0px;
+border-color: #DFDFDF;
+border-style: solid;    
+}
+.mr_menu_item{
+background-color:#D9EDF7;
+width:100%;
+font-weight:bold;
+padding:4px;
+margin-top:2px;
+margin-bottom:8px;
+margin-left:0px;
+margin-right:4px;
+border-width: thin;
+border-color: #A0A0A0;
+border-style: solid;
+-moz-border-radius: 4px;
+border-radius: 4px 
+}
+#mr_menu_download{
+background-color:#D9EDF7; 
+margin:15px;  
+padding:10px;
+border-width: thin;
+border-color: #A0A0A0;
+border-style: solid;
+-moz-border-radius: 3px;
+border-radius: 3px
+}
+#go_article{
+background-color:#ffffff; 
+font-weight:bold;
+font-size:18px;
+border-width: 0px;
+}
+#list_articles{
+margin: 4px
+}
+#upload_box{
+border-left-width: thin;
+border-right-width: 0px;
+border-top-width: 0px;
+border-bottom-width: 0px;
+margin-right:4px;
+border-color: #A0A0A0;
+border-style: solid
+}
+#img_block, #doc_block, #med_block, #add_rubr{
+text-align:left;
+padding:10px; margin:8px;
+border-width:thin;
+border-color:#959595;
+border-style:solid;
+-moz-border-radius: 3px;
+border-radius: 3px;
+}
+#img_block{
+background-color: #ebf7ff;
+}
+#doc_block{
+background-color: #deebfe;
+}
+#med_block{
+background-color: #c6e0f6;
+}
+#add_rubr{
+background-color: #EDEDED;
+}
+#delete_chbox{
+color:red;    
+}
+#navbar-collapse-1{
+padding: 0px;
+margin: 0px;
+height: 30px;
+}
+
+.nickname{
+font-weight: bold;
+color:#428BCA;
+}
+.parent_nickname{
+font-weight: bold;
+font-size:12px;
+color:#707070;
+}
+.label_style{
+color:#428BCA;
+}
+.highlight_style{
+color: blue;
+}
+.header_style{
+border-bottom-width:4px;
+border-top-width:0px;
+border-left-width:0px;
+border-right-width:0px;
+border-style:solid;
+border-color:#5F7AA9;
+background-color:#BEDFF3;
+padding:4px;
+color:#000000;
+}
+.date_comment{
+font-size: 11px;
+color: #777777;
+}
+#rubric_style_custom{
+/*color: maroon;*/
+}
+.date_post{
+font-size: 12px;
+color: #777777;
+margin-right:12px;
+}
+.head_post{
+/*text-decoration: underline; */ 
+}
+.indx_style{
+text-align: left;
+padding:16px;    
+}
+#indx_style{
+padding: 16px;    
+}
+.artcl_content{
+text-align: justify;
+padding-right: 10px;  
+}
+#textar_answ{
+width: 500px;
+}
+#articl_box{
+border-left-width: 0px;
+border-right-width: 1px;
+border-top-width: 0px;
+border-bottom-width: 0px;
+border-color: #E7E7E7;
+border-style: solid;  
+}
+#auth_form{ 
+height: 28px; 
+}
+#enter_button{
+margin-top:6px;    
+}
+#forgotn_button{
+background-color:#ffffff;
+color:#438BCA;
+padding-left:0px;
+margin-top:6px;
+border-width: 0px;    
+}
+#archive_month_block{
+margin:0px;
+padding:0px;
+color: #000000
+}
+#li_archive_month{
+margin:0px;
+padding-left:8px;
+padding-top:0px;
+padding-bottom:1px;
+color: #000000
+}
+.li_month_disable{
+font-weight:bold;
+color: #000000
+}
+.archive_month_label{
+color: #000000
+}
+/*code{
+color: #000000
+}*/
+#breadcrmb{
+font-family:Arial;
+padding-right:0px;
+}
+ol {
+	background:#D6D6D6 url(/img/gutter.gif) 2.3em 0 repeat-y;
+	overflow:auto;
+	font-family:"Courier New",Courier,mono;
+	margin:0;
+	padding:1px 1px 1px 2.8em;
+	color:#000000;
+	width:95%;
+}
+ol li {
+	background:#F8F8F8;
+    padding:1px
+	/*font-size:small;*/
+}
+ol code {
+background:#F8F8F8;
+color:#036;
+}
+ul .pgn_style{
+background-color: blue;
+}
+/*=================================================*/
+#dropdownMenu1{
+background-color:#5BC0DE;
+color: navy;
+}
+/*#navbar-nav-1{
+color:#ffffff;    
+}
+#navbar-collapse-1{
+background-color: #A2C3D2;
+margin-right:0px;
+padding:0px;
+}
+#navbar-1{
+background-color: #A2C3D2;
+padding:0px;
+margin-right:0px;
+border-width:0px;
+-moz-border-radius: 0px;
+border-radius: 0px;
+}*/
+.button_menu{
+border-width:0px;
+background-color: transparent;
+color: navy    
+}

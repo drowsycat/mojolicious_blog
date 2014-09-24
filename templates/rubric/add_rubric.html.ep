@@ -1,0 +1,73 @@
+% layout 'layout_admin';
+
+<div id="body_innr_article">
+<h3 style="color:#428BCA">
+<%= link_to $header => 'manager' %>
+</h3>
+
+<div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <p class="mr_menu_item">
+            <a href="/menu_manage">Menu</a>
+            </p>
+        </div>
+        <div class="col-md-4"></div>
+</div>
+<!--------------------------------------------->
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+%= form_for "/article_manage" => begin
+%= hidden_field title_alias => $title_alias
+%= hidden_field id => $id
+%= submit_button $head, name => 'go_article', id => 'go_article'
+% end
+
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<!--------------------------------------------->
+
+<hr>
+<div class="row">
+    <div class="col-md-6">
+    <%= $self->lang_config->{'labels'}->{$language}->{'exist_rubric'} %>:
+    %= text_area 'rubric_list'=> (class => 'form-control', rows => 10) => begin
+    % foreach(@$rubric_list){
+<%= $_ %>
+    % }
+    % end
+    
+    <br>
+    %= form_for '/edit_rubric' => (method => 'post') => begin
+    %= hidden_field title_alias => $title_alias
+    %= hidden_field id => $id
+    %= hidden_field redirect_to => $redirect_to
+    %= submit_button $self->lang_config->{'labels'}->{$language}->{'edit_rubric'}, class => 'btn btn-primary btn-sm', name => 'edit_rubr'
+    % end
+    
+    </div>
+    
+    <div class="col-md-6">
+    <%= $self->lang_config->{'labels'}->{$language}->{'add_rubric'} %>: <%== $message %>
+    <div>
+    %= form_for '/add_rubric' => (method => 'post') => begin
+    %= hidden_field title_alias => $title_alias
+    %= hidden_field id => $id
+    %= hidden_field redirect_to => $redirect_to
+    <b style="color:red">
+    <%= $rubric_err %>
+    </b>
+    %= text_field 'rubric', class => 'form-control'
+    <br>
+    %= submit_button $self->lang_config->{'labels'}->{$language}->{'add_rubric'}, class => 'btn btn-primary btn-sm', name => 'add_rubric'
+    <input type="reset" value="reset" class = "btn btn-warning btn-sm">
+    % end
+    
+    </div>
+    </div>
+
+</div>
+
+</div>

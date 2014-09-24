@@ -1,0 +1,88 @@
+% layout 'templ2/bootstrap';
+% use Transliter;
+% use Templ1::RubricList;
+
+% my $admin_check = $self->session('admin');
+
+<div class="row">
+    <div class="col-md-8">
+    <h1>Perl і не тільки</h1>
+    </div>
+    <div class="col-md-4">
+        %= form_for 'search_artcl' => (method => 'post', class => 'form-search') => begin
+        <div class="input-group">
+        <input type="text" class="form-control" name="search_frase">
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-default" name="suchen">
+            <span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+        % end
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    <img src="/img/logo_img.jpg" width="1000">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    
+<%= include 'templ1/menu' =%>
+    
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9" id="articl_box">
+    % my $i = 0;
+    % foreach( @$other_month ){
+        %= link_to $self->lang_config->{'num_month'}->{(split(/-/, $_))[1]}->{$language} => '/archive/'.(split(/-/, $_))[0].'/'.(split(/-/, $_))[1]
+        % if($i == scalar(@$other_month)-1){
+        % }else{
+        |
+        % }
+    % $i++;
+    % }
+    <h4><%= $year_month %></h4>
+    % foreach(reverse sort keys %{$content}){
+    %# Формуємо адресу статті для адресного рядка браузера з заголовка статті
+        %    my $literal_ident = Transliter->transliter($$content{$_}->{'head'});
+        %# Новий елемент хешу потім передаємо в шаблон
+        %    $literal_ident =~ s/\_/\-/g if($literal_ident =~ /\_/);
+        <span class="date_post"><%= $$content{$_}->{'curr_date'} %></span>
+         %# Лінк на публікації з даної рубрики
+         % if($$content{$_}->{'rubric_id'} != 0){
+        |&nbsp; <span class="date_post"><%== Templ2::RubricList->rubric_link($self, $$content{$_}->{'rubric_id'}) %></span>
+        % }
+        % if(!$$content{$_}->{'url'}){
+            <a href="/">
+        % }else{
+        <a href="<%= $$content{$_}->{'url'}.'/'.$$content{$_}->{'id'}.'/'.$literal_ident %>">
+        % }
+        <h4 class="head_post" id="head_post_custom">
+        %= $$content{$_}->{'head'}
+        </h4>
+        </a>
+        <%== $$content{$_}->{'announce'} %>
+        <hr>
+    % }
+    
+    <div class="row">
+            <div class="col-xs-8 col-sm-12">
+        %= bootstrap_pagination( $current_page, $total_pages, {round => $pagination_attr->{'round'}, outer => $pagination_attr->{'outer'}, class => 'pagination-md', param => 'page' } )
+            </div>
+        </div>
+    
+    </div>
+
+    <div class="col-md-3">
+    <%= include 'authorize' =%>
+    <%= include 'templ2/rubric_list' =%>
+    <%= include 'templ2/archive_menu' =%>
+    <%= include 'templ2/meta_menu' %>
+    </div>
+    
+</div>

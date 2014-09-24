@@ -1,0 +1,16 @@
+<b>Placed illustrations: </b>&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="<%= "/thumb_img?title_alias=$title_alias&id=$id" %>"><%= $self->lang_config->{'buttons'}->{$language}->{'thumb_proper'} %></a>
+<br>
+% foreach my $illustr(@$illustr_arr){
+% my $lead_image_checked;
+% $lead_image_checked = 'checked' if( $illustr->{'file'} eq $lead_img );
+
+    <label class="radio-inline">
+    <input type="radio" name="lead_img" value="<%= $illustr->{'file'} %>" <%= $lead_image_checked %>>lead
+    </label>
+    <%= image $illustr->{'path'}.'/tn_'.$illustr->{'file'}, vspace => '2' %>
+    <%= 'http://'.$self->req->headers->host.$illustr->{'path'}.'/'.$illustr->{'file'} %>
+
+%= check_box delete_illustr => $illustr->{'file'}, id => 'delete_chbox' 
+<span id="delete_chbox">delete</span><br>
+%}

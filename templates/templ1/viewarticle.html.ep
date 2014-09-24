@@ -1,0 +1,74 @@
+% layout 'templ1/bootstrap';
+% use Templ1::RubricList;
+
+% my $admin_check = $self->session('admin');
+
+<div class="row">
+    <div class="col-md-8">
+    <h1>Perl і не тільки</h1>
+    </div>
+    <div class="col-md-4">
+        %= form_for 'search_artcl' => (method => 'post', class => 'form-search') => begin
+        <div class="input-group">
+        <input type="text" class="form-control" name="search_frase">
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-default" name="suchen">
+            <span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+        % end
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    <img src="/img/logo_img.jpg" width="970">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    
+<%= include 'templ1/menu' =%>
+    
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9" id="articl_box">
+    <span><%== $bread_crumbs %></span>
+    <br>
+    <span class="date_post"><%= $content->[0]->{'curr_date'} %></span>
+    %# Лінк на публікації з даної рубрики
+    % if($content->[0]->{'rubric_id'} != 0){
+    |&nbsp; <span class="date_post"><%== Templ1::RubricList->rubric_link($c, $content->[0]->{'rubric_id'}) %></span>
+    % }
+    % if($admin_check){
+        % # Тут $title_alias - назва таблиці для даної публікації
+        % my $title_alias = (split(/\//, $self->req->url))[-3];
+        % my $id = (split(/\//, $self->req->url))[-2];
+        <span class="edit_str">|&nbsp; 
+        <%= link_to 'Edit' => '/article_manage?title_alias='.${title_alias}.'&id='.$id %>
+        </span>
+    % }
+    <h3 class="head_post"><%= $content->[0]->{'head'} %></h3>
+    <span class="artcl_content">
+    <%== $content->[0]->{'content'} %>
+    </span>
+    
+    % if($content->[0]->{'comment_enable'} eq 'yes'){    
+        <div class="col-xs-8 col-sm-12">
+            <%= include 'comment_form' =%>
+        </div>
+    % }
+
+    </div>
+
+    <div class="col-md-3">
+    <%= include 'authorize' =%>
+    <%= include 'templ1/rubric_list' %>
+    <%= include 'templ1/archive_menu' =%>
+    <%= include 'templ1/meta_menu' %>
+    </div>
+    
+</div>

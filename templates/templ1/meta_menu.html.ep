@@ -1,0 +1,4 @@
+<h4 class="header_style" id="header"><%= $self->lang_config->{'meta'}->{$language} %></h4>
+<a href="/articles-feed"><img src="<%= 'http://'.$self->req->headers->host %>/img/rss_icon.png" vspace="4"> публікацій</a>
+<br>
+<a href="/comments-feed"><img src="<%= 'http://'.$self->req->headers->host %>/img/rss_icon.png" vspace="4"> коментарів</a>

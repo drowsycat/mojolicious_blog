@@ -1,0 +1,10 @@
+<b>Placed documents: </b>
+<br>
+% foreach my $doc(@$docs_arr){
+    % my $extens = (split(/\./, $doc->{'file'}))[-1]; 
+    <img src="<%= $self->top_config->{'path_to_icon'}->{$extens} %>">
+    <%= $doc->{'path'}.'/'.$doc->{'file'} %>
+--------------
+%= check_box delete_doc => $doc->{'file'} 
+delete<br>
+%}

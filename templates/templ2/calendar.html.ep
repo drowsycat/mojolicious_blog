@@ -1,0 +1,88 @@
+<!--<div style="margin-left:-6px">-->
+%= form_for 'calendar' => (method => 'post') => begin
+
+%#= $num_month->{'01'}
+
+<!-- Responsive calendar - START -->
+<div class="container" style="width:230px">
+    	<div class="responsive-calendar">
+        <div class="controls">
+            <h5><a class="pull-left" data-go="prev">«</a>
+            <span data-head-year></span> <span data-head-month></span><a class="pull-right" data-go="next">»</a></h5>
+        </div><hr/>
+        <div class="day-headers">
+          <div class="day header">Пн</div>
+          <div class="day header">Вт</div>
+          <div class="day header">Ср</div>
+          <div class="day header">Чт</div>
+          <div class="day header">Пт</div>
+          <div class="day header">Сб</div>
+          <div class="day header">Нд</div>
+        </div>
+        <div class="days" data-group="days">
+          
+        </div>
+      </div>
+      <!-- Responsive calendar - END -->
+      </div>
+<script type="text/javascript">
+      $(document).ready(function () {
+        $(".responsive-calendar").responsiveCalendar({
+          time: '2013-05',
+          events: {
+            "2013-04-30": {"number": 5, "url": "http://w3widgets.com/responsive-slider"},
+            "2013-04-26": {"number": 1, "url": "http://w3widgets.com"}, 
+            "2013-05-03": {"url": "http://w3widgets.com"}, 
+            "2013-06-12": {}}
+        });
+      });
+    </script>
+
+<!--<table bgcolor=#C4B88A frame=border rules=none border=1 cellspacing=0 cellpadding=0><tr align=center><td colspan=7 valign=middle><DIV id=year_style>січень - 2009</DIV></td>
+<tr align = center>
+<td><img src=/nk/imag/whit_kvadr.gif></td>
+<td><img src=/nk/imag/whit_kvadr.gif></td>
+<td><img src=/nk/imag/whit_kvadr.gif></td>
+<td><DIV id = empty_day>1</DIV></td>
+<td><DIV id = empty_day>2</DIV></td>
+<td><DIV id = empty_day>3</DIV></td>
+<td><DIV id = empty_day>4</DIV></td>
+<tr align = center>
+<td><A href=/nk/news/20090105/index.html><DIV id = cell_calend>5</DIV></A></td>
+<td><DIV id = empty_day>6</DIV></td>
+<td><DIV id = empty_day>7</DIV></td>
+<td><DIV id = empty_day>8</DIV></td>
+<td><DIV id = empty_day>9</DIV></td>
+<td><DIV id = empty_day>10</DIV></td>
+<td><DIV id = empty_day>11</DIV></td>
+<tr align = center>
+<td><DIV id = empty_day>12</DIV></td>
+<td><DIV id = empty_day>13</DIV></td>
+<td><DIV id = empty_day>14</DIV></td>
+<td><DIV id = empty_day>15</DIV></td>
+<td><DIV id = empty_day>16</DIV></td>
+<td><DIV id = empty_day>17</DIV></td>
+<td><DIV id = empty_day>18</DIV></td>
+<tr align = center>
+<td><DIV id = empty_day>19</DIV></td>
+<td><DIV id = empty_day>20</DIV></td>
+<td><DIV id = empty_day>21</DIV></td>
+<td><DIV id = empty_day>22</DIV></td>
+<td><DIV id = empty_day>23</DIV></td>
+<td><DIV id = empty_day>24</DIV></td>
+<td><DIV id = empty_day>25</DIV></td>
+<tr align = center>
+<td><DIV id = empty_day>26</DIV></td>
+<td><DIV id = empty_day>27</DIV></td>
+<td><DIV id = empty_day>28</DIV></td>
+<td><DIV id = empty_day>29</DIV></td>
+<td><DIV id = empty_day>30</DIV></td>
+<td><DIV id = empty_day>31</DIV></td>
+</table>-->
+
+%#= $current_val
+<br>
+%#= hidden_field 'number' => $current_val
+%= submit_button 'next', name => 'next', id => 'calend_style'
+% end
+<!--</div>-->

@@ -1,0 +1,225 @@
+% layout 'layout_admin';
+% use Transliter;
+
+% my $site_link;
+
+<div id="body_innr_article">
+<h3 style="color:#428BCA">
+<%= link_to $header => 'manager' %>
+</h3>
+
+<div class="row">
+    <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <p class="mr_menu_item">
+            <a href="/menu_manage">Menu</a>
+            </p>
+        </div>
+        <div class="col-md-4"></div>
+</div>
+<div class="row">
+    <div class="col-md-4"></div>
+        <div class="col-md-4">
+% if( $list_enable eq 'yes' ){
+%= form_for "/list_content_manage" => begin
+%= hidden_field title_alias => $title_alias
+%= hidden_field title => $title_chapter
+%= submit_button $title_chapter.' ('.$self->lang_config->{'list_enable'}->{$list_enable}->{$language}.')', class => 'mr_menu_item', name => 'go_article'
+% end
+% }else{
+<p class = "mr_menu_item"><%= $title_chapter %> (<%= $self->lang_config->{'list_enable'}->{$list_enable}->{$language} %>)</p>
+% }
+        </div>
+        <div class="col-md-4"></div>
+</div>
+
+% if($url eq '/' && $list_enable eq 'no' || ($list_enable eq 'no')){
+    % $site_link = $url;
+% }else{
+    % my $literal_ident = Transliter->transliter($content->[0]->{'head'});
+    % $literal_ident =~ s/\_/\-/g if($literal_ident =~ /\_/);
+    % $site_link = $url.'/'.$id.'/'.$literal_ident;
+% }
+    
+  <h3>
+  <%= $head %> <%= link_to '(На сайт)' => $site_link %>
+  </h3>
+<hr>
+
+<div class="row" style="text-align:left">
+<!------------------------------------------------->
+    <div class="col-md-8">
+    
+%= form_for article_manage => (enctype => 'multipart/form-data', method => 'post') => begin
+
+% foreach my $item(@$content){
+% my $comment_enable_checked;
+% my $comment_disable_checked;
+% if($item->{'comment_enable'} eq 'yes'){$comment_enable_checked = 'checked'}
+% if($item->{'comment_enable'} eq 'no'){$comment_disable_checked = 'checked'}
+
+<div class="row">
+
+<div class="col-sm-6">
+<div class="radio">
+  <label class="radio-inline">
+    <input type="radio" name="comment_enable" value="yes" <%= $comment_enable_checked %>> <%= $self->lang_config->{'labels'}->{$language}->{'enable_comments'} %>
+  </label>
+</div>
+</div>
+
+<div class="col-sm-6">
+<div class="radio">
+  <label class="radio-inline">
+<input type="radio" name="comment_enable" value="no" <%= $comment_disable_checked %>> <%= $self->lang_config->{'labels'}->{$language}->{'disable_comments'} %>
+  </label>
+</div>
+</div>
+
+</div>
+<hr>
+
+Description: <b style="color:red"><%= $description_err %></b>
+<br>
+%= text_field 'description', value => $item->{'description'}, class => 'form-control'
+<br>
+Keywords: <b style="color:red"><%= $keywords_err %></b>
+<br>
+%= text_field 'keywords', value => $item->{'keywords'}, class => 'form-control', size => 100
+<br>
+Category: <br>
+<div class="row">
+    <div class="col-sm-10">
+    
+    <select name="rubric" class="form-control" style="background-color:#EDEDED">
+    % my $select_attr;
+    <option value=""><%= $self->lang_config->{'labels'}->{$language}->{'no_rubric'} %>
+    % foreach(@$rubric_list){
+    % $select_attr = 'selected' if($_->{'id'} eq $item->{'rubric_id'});
+        <option value="<%= $_->{'id'} %>" <%= $select_attr %>><%= $_->{'rubric'} %>
+    % $select_attr = "";
+    % }
+    </select>
+    
+    </div>
+    
+    <div class="col-sm-2">
+    </div>
+    
+</div>
+
+<br>
+Date: <br>
+%= text_field 'curr_date', value => $item->{'curr_date'}, class => 'form-control', size => 40
+<br>
+
+The head of publication: <b style="color:red"><%= $head_err %></b>
+<br>
+%= text_field 'head', value => $item->{'head'}, class => 'form-control', size => 100
+
+<br>
+%# Вивід списку ілюстрацій ########################################
+<div id="img_block">
+% if($illustr_arr){
+    <%= include 'placed_illustr' =%>
+% }
+</div>
+
+%# Вивід списку документів ########################################
+<div id="doc_block">
+% if($docs_arr){
+    <%= include 'placed_docs' =%>
+% }
+</div>
+
+%# Вивід списку media ########################################
+<div id="med_block">
+% if($media_arr){
+    <%= include 'placed_media' =%>
+% }
+</div>
+
+<div>
+Annotation:
+<br>
+%= text_area 'announce' => $item->{'announce'}, class => 'form-control', rows => 5, cols => 84, id => 'textar'
+%#= javascript begin
+<!--var oFCKeditor = new FCKeditor('announce');
+oFCKeditor.BasePath = "/FCKeditor_266/";
+oFCKeditor.Config["CustomConfigurationsPath"] = "/FCKeditor_266/fckconfig.js" ;
+oFCKeditor.ReplaceTextarea();-->
+%# end
+</div>
+
+<br>
+%= text_area cont_text => begin
+%= $item->{'content'}
+% end
+%= javascript begin
+var oFCKeditor = new FCKeditor('cont_text');
+oFCKeditor.BasePath = "/FCKeditor_266/";
+oFCKeditor.Config["CustomConfigurationsPath"] = "/FCKeditor_266/fckconfig.js" ;
+oFCKeditor.ReplaceTextarea();
+
+% end
+
+<br>
+Author: <br>
+<div class="row">
+    <div class="col-xs-5 col-sm-6">
+%= text_field 'author', value => $item->{'author'}, class => 'form-control', size => 50
+%= hidden_field title_alias => $title_alias
+%= hidden_field id => $id
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-1 col-sm-6"></div>
+    <div class="col-xs-5 col-sm-6">
+    <br>
+%= submit_button 'edit', name => 'edit', class => "btn btn-primary"
+<input type="reset" value="reset" class = "btn btn-warning">
+    </div>
+</div>
+
+% }
+% end    
+
+    </div>
+<!------------------------------------------------------>
+
+    <div class="col-md-3" id="upload_box">
+    
+    <div id="add_rubr">    
+%= form_for '/add_rubric' => (method => 'post') => begin
+%= hidden_field title_alias => $title_alias
+%= hidden_field title => $title_chapter
+%= hidden_field id => $id
+%= hidden_field redirect_to => $redirect_to
+%= submit_button $self->lang_config->{'labels'}->{$language}->{'add_rubric'}, class => 'btn btn-primary btn-sm', name => 'go_new_rubric'
+% end
+
+</div>
+    
+    % foreach( @{$self->top_config->{'type_of_upload_keys'}} ){
+    
+        <div id="<%= $self->top_config->{'style_upload_box'}->{$_} %>">
+        %= form_for $self->top_config->{'template_for_type_upload'}->{$_} => (enctype => 'multipart/form-data', method => 'post') => begin
+        %= hidden_field redirect_to => $redirect_to
+        %= hidden_field title_alias => $title_alias
+        %= hidden_field sourse_key => $_
+        %= hidden_field id => $id
+        %= hidden_field head => $head
+        %= hidden_field valid_format_func => $self->top_config->{'get_valid_format_func'}->{$type_of_upload->{$_}}
+        %= hidden_field template_for_upload => $self->top_config->{'template_for_type_upload'}->{$_}
+        %= hidden_field path_for_upload => $self->top_config->{$self->top_config->{'path_upload_hash'}->{$_}}
+        %= submit_button $self->lang_config->{'buttons'}->{$language}->{$_}, class => 'btn btn-primary btn-sm', name => $self->top_config->{'template_for_type_upload'}->{$_}, id => 'upload_button'
+        % end
+        
+        </div>
+    % }
+ 
+    </div>
+    
+</div>  
+
+</div>

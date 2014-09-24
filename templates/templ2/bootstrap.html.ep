@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title><%= $title %></title>
+     <link rel="stylesheet" href="<%= url_for("/css/templ2/bootstrap.css") %>" />
+     <link rel="stylesheet" href="<%= url_for("/css/main.css") %>" />
+     <link rel="stylesheet" href="<%= url_for("/css/responsive-calendar.css") %>" />
+     <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+     <script src="<%= url_for("/js/jquery-1.9.1.js") %>"></script>
+     <script language="javascript" src="<%= url_for("/js/my_publ.js") %>"></script>
+     <script language="javascript" src="<%= url_for("/js/bootstrap.min.js") %>"></script>
+     <script src="<%= url_for("/js/responsive-calendar.js") %>"></script>
+  </head>
+  <body>  
+  <div id="body_innr">
+  
+  <div id="content">
+    <div class="container-fluid">
+       <%= content %>
+    </div>
+  </div>
+  
+  </div>
+  </body>
+</html>

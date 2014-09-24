@@ -1,0 +1,29 @@
+% layout 'layout_admin';
+
+<div id="body_innr_adm">
+<h3 style="color:#428BCA">
+<%= $title %>
+</h3>
+<hr>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <p class="mr_menu_item">
+            %= link_to Logo => 'logo_manage'
+            </p>
+            <p class="mr_menu_item">
+            %= link_to Menu => 'menu_manage'
+            </p>
+            <p class="mr_menu_item">
+            %= link_to Comments => 'comments_setting'
+            </p>
+            <p class="mr_menu_item">
+            %= link_to Pagination => 'pagination_articl'
+            </p>
+            <p class="mr_menu_item">
+            %= link_to RSS => 'rss_setting'
+            </p>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>

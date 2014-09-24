@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+     <title><%= $title %></title>
+     <link rel="stylesheet" href="<%= url_for("/css/bootstrap.min.css") %>" />
+     <!--<link rel="stylesheet" href="<%= url_for("/css/bootstrap-responsive.css") %>" />-->
+     <link rel="stylesheet" href="<%= url_for("/css/docs.css") %>" />
+     <link rel="stylesheet" href="<%= url_for("/css/prettify.css") %>" />
+     <link rel="stylesheet" href="<%= url_for("/css/main.css") %>" />
+     <!--<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
+     <script src="<%= url_for("/js/jquery-1.9.1.js") %>"></script>
+     <script src="<%= url_for("/js/bootstrap-filestyle.min.js") %>"></script>
+     <script language="javascript" src="<%= url_for("/js/bootstrap.min.js") %>"></script>
+     <!--<script src="<%= url_for("/js/jquery.bsFormAlerts.js") %>"></script>-->
+     %= javascript '/FCKeditor_266/fckeditor.js'
+  </head>
+  <body>  
+<!--  <div id="body_innr">-->
+  
+    <div class="container">
+       <%= content %>
+    </div>
+  
+<!--  </div>-->
+  </body>
+</html>

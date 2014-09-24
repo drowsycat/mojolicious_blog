@@ -1,0 +1,2 @@
+<h4 class="header_style" id="header"><%= $self->lang_config->{'archive'}->{$language} %></h4>
+<%== $archive_menu %>

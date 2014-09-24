@@ -1,0 +1,5 @@
+<h4 class="header_style" id="header"><%= $self->lang_config->{'rubric_list'}->{$language} %></h4>
+%foreach(sort keys %{$rubrics}){
+    %= link_to $$rubrics{$_} => '/rubric/'.$_
+    <br>
+% }

@@ -1,0 +1,121 @@
+% layout 'templ2/bootstrap';
+% use Transliter;
+% use Templ1::RubricList;
+
+% my $admin_check = $self->session('admin');
+
+<div class="row">
+    <div class="col-md-8">
+    <h1>Perl і не тільки</h1>
+    </div>
+    <div class="col-md-4">
+        %= form_for 'search_artcl' => (method => 'post', class => 'form-search') => begin
+        <div class="input-group">
+        <input type="text" class="form-control" name="search_frase">
+            <span class="input-group-btn">
+            <button type="submit" class="btn btn-default" name="suchen">
+            <span class="glyphicon glyphicon-search"></span></button>
+            </span>
+        </div>
+        % end
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    <img src="/img/logo_img.jpg" width="1000">
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+    
+<%= include 'templ1/menu' =%>
+    
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9" id="articl_box">
+    % if($list_enable eq 'no'){
+    <span><%== $bread_crumbs %></span>
+    <span class="date_post"><%= $content->[0]->{'curr_date'} %></span>
+    % if($content->[0]->{'rubric_id'} != 0){
+    |&nbsp; <span class="date_post"><%== Templ2::RubricList->rubric_link($self, $content->[0]->{'rubric_id'}) %></span>
+    % }
+    % if($admin_check){
+        % # Тут $title_alias - назва таблиці для даної публікації
+        % my $title_alias = (split(/\//, $self->req->url))[-2] || 'main';
+        % my $id = (split(/\//, $self->req->url))[-1] || $content->[0]->{'id'};
+        % if( scalar(split(/\//, $self->req->url)) == 2 || scalar(split(/\//, $self->req->url)) == 3 ){
+            % $title_alias = (split(/\//, $self->req->url))[-1];
+            % $id = $content->[0]->{'id'};
+        % }
+        <span class="edit_str">| 
+        <%= link_to 'Edit' => '/article_manage?title_alias='.${title_alias}.'&id='.$id %>
+        </span>
+    % }
+    <h3 class="head_post" id="head_post_custom"><%= $content->[0]->{'head'} %></h3>
+    <span class="artcl_content">
+    <%== $content->[0]->{'content'} %>
+    </span>
+    % if($content->[0]->{'comment_enable'} eq 'yes'){
+    
+    <div class="col-xs-8 col-sm-12">
+        <%= include 'comment_form' =%>
+    </div>
+    % }
+    
+    % }else{
+    
+        % if($list_enable eq 'yes' && $pagination_attr->{'pgn_place'} eq 'top_bottom'){        
+            <div class="row">
+                <div class="col-xs-8 col-sm-12">
+                %= bootstrap_pagination( $current_page, $total_pages, {round => 1, outer => 1, class => 'pagination-md', param => 'page' } )
+                </div>
+            </div>
+        % }
+        
+        <span><%== $bread_crumbs %></span>
+        % foreach my $item(@$content){
+        %# Формуємо адресу статті для адресного рядка браузера з заголовка статті
+        %    my $literal_ident = Transliter->transliter($item->{'head'});
+        %# Новий елемент хешу потім передаємо в шаблон
+        %    $literal_ident =~ s/\_/\-/g if($literal_ident =~ /\_/);
+        <div class="row" id="indx_style">
+            <span class="date_post"><%= $item->{'curr_date'} %></span>
+            %# Лінк на публікації з даної рубрики
+            % if($item->{'rubric_id'} != 0){
+            |&nbsp; <span class="date_post"><%== Templ2::RubricList->rubric_link($self, $item->{'rubric_id'}) %></span>
+            % }
+            <a href="<%= "$url_chaptr/$item->{'id'}/$literal_ident" %>">
+            <h4 class="head_post" id="head_post_custom"><%= $item->{'head'} %></h4>
+            </a>
+            <span class="artcl_content">
+            % if($item->{'lead_img'}){
+            <img src="/illustration/lid_<%= $item->{'lead_img'} %>" vspace="2" hspace="4" align="left" alt="" class="<%= $self->thumb_img_style %>">
+            % }
+            <%== $item->{'announce'} %>
+            </span>
+        </div>
+        <hr>
+        % }
+    % }
+    % if($list_enable eq 'yes'){
+         <div class="row">
+            <div class="col-xs-8 col-sm-12">
+        %= bootstrap_pagination( $current_page, $total_pages, {round => $pagination_attr->{'round'}, outer => $pagination_attr->{'outer'}, class => 'pagination-md', param => 'page' } )
+            </div>
+        </div>
+    % }
+
+    </div>
+
+    <div class="col-md-3">
+    <%= include 'authorize' =%>
+    <%= include 'templ2/rubric_list' %>
+    <%= include 'templ2/archive_menu' =%>
+    <%= include 'templ2/meta_menu' %>
+    </div>
+    
+</div>

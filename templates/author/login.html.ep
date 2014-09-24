@@ -1,0 +1,30 @@
+% layout 'bootstrap';
+
+%= form_for login => (method => 'post') => begin
+<div style="margin:200px auto; width:80%">
+% if ( $message ) {
+    <b style="color: red"><%= $message %></b><br>
+  % }
+%= hidden_field 'language' => $language
+%= hidden_field 'redirect_to' => $redirect_to
+Login: 
+<b style="color:maroon"><%= $login_err %></b>
+<br>
+%= text_field 'login', size => 25
+<br>
+Password: 
+<b style="color:maroon"><%= $pass_err %></b>
+<br>
+%= password_field 'pass', size => 25
+<br>
+Email: 
+<b style="color:maroon"><%= $email_err %></b>
+<br>
+%= text_field 'email', size => 25
+<br><br>
+%= submit_button $self->lang_config->{'sevice_frase'}->{'buttons'}->{$language}->{'register'}, name => 'register', id => 'upload_button'
+%= input_tag 'reset', type => 'reset', id => 'upload_button'
+% end
+
+</div>
+<hr>

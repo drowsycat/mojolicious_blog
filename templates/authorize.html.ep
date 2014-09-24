@@ -1,0 +1,30 @@
+% $self->req->url;
+
+% if( $self->session('client') ){
+<p class="nickname"><%= $self->session('client')->[1] %></p>
+<br>
+% }
+% else{ 
+%= form_for $self->req->url => (method => 'post') => begin
+%#= form_for 'authorize' => (method => 'post') => begin
+
+<b style="color:red"><%= $message %></b><br> <%#= Повідомлення про неправильний логін або пароль ############## %>
+%= hidden_field 'redirect_to' => $self->req->url
+<%= $self->lang_config->{'buttons'}->{$language}->{'login'} %>: 
+<b style="color:red"><%= $login_err %></b>
+<br>
+%= text_field 'login', class => 'form-control input-sm', id => 'auth_form'
+
+<%= $self->lang_config->{'buttons'}->{$language}->{'passw'} %>: 
+<b style="color:red"><%= $pass_err %></b>
+<br>
+%= password_field 'pass', class => 'form-control input-sm', id => 'auth_form'
+%= submit_button $self->lang_config->{'buttons'}->{$language}->{'enter'}, name => 'authorize', class => 'btn btn-default btn-sm active', id => 'enter_button'
+%= submit_button $self->lang_config->{'buttons'}->{$language}->{'register'}, name => 'registration', class => 'btn btn-default btn-sm', id => 'enter_button'
+<br>
+%= submit_button $self->lang_config->{'buttons'}->{$language}->{'forgot_passw'}, name => 'forgot_passw', id => 'forgotn_button'
+% end
+
+% }
+
+%#= $self->req->url
