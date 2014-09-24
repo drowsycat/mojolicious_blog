@@ -145,10 +145,8 @@ my $table_attr  = $self->top_config->{'adm'}->{'table'}->{$template}->{'access'}
 my $table_access = $table_attr->{'name'};
 #Масив таблиць рівнів для даного шаблону
 my @levels = @{$self->top_config->{$template}->{'levels'}};
-push @levels, 'main';
 # Масив полів форми, що обов'язково мають бути заповнені
 my $admin_required_fields = $self->top_config->{'adm'}->{'admin_required_fields'}->{$template};
-#$message = "";
 
 # Надсилається запит
 #*****************************
