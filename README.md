@@ -1,6 +1,6 @@
 DESCRIPTION
 ===========
-To work with this repository you need to install MySQL, Perl and such modules:
+To work with this repository you need to install MySQL, Perl version not less then 5.10.1 and such modules:
 
     Mojolicious;
     PSGI;
