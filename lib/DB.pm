@@ -30,9 +30,9 @@ my $table_live;
 my %db_attr = (
 #BEGIN##
 host => 'localhost', #HOST
-username => 'root', #USER
-password => 'vangog',    #PASSW
-database => 'myblog_git', #DBNAME
+username => '', #USER
+password => '',    #PASSW
+database => '', #DBNAME
 #END##
 );
 
