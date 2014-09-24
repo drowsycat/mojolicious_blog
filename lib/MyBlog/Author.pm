@@ -129,6 +129,12 @@ title => $self->lang_config->{'labels'}->{$language}->{'dbaccess_admin_config'}
 sub admin {
 #---------------------------------
 my $self = shift;
+use Cwd;
+chdir cwd();
+# Створюємо директорії, яких може не бути в 'git', але які є необхвдними
+foreach(@{$self->top_config->{'need_ditectories'}}){
+    mkdir($_, 0755);
+}
 
 my(%err_hash, $message, $db);
 my $language = $self->top_config->{'exist_langs'};
@@ -168,9 +174,9 @@ if( $self->param('enter') && scalar(keys %err_hash) <= 0 ){
 
     foreach(@{$self->top_config->{'need_tables_main'}}){
         my($table, $key) = split(/\-/, $_);
-        my @data = $db->select($table, '*')->list;
+        my $id = $db->select($table, ['id'])->list;
 
-        if( !@data ){
+        if( !$id ){
             #DB::Create->create_table($table, $key);
             DB::Insert->insert($self, $table, $table);
         }
@@ -194,7 +200,11 @@ foreach( @levels ){#-------------
     # Створюємо таблицю рівня, якщо її немає
     if( !$table_live ){
             DB::Create->create_table($_, 'level');
-        }
+    }
+    ($table_live) = DB::Select->like_table('main');
+    if( !$table_live ){
+            DB::Create->create_table('main', 'main');
+    }
 }#---------------------------------------------------------------------
 
 $self->render(
