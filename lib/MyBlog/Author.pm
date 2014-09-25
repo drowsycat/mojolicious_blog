@@ -175,7 +175,6 @@ if( $self->param('enter') && scalar(keys %err_hash) <= 0 ){
         my $id = $db->select($table, ['id'])->list;
 
         if( !$id ){
-            #DB::Create->create_table($table, $key);
             DB::Insert->insert($self, $table, $table);
         }
     }
