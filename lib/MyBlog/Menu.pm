@@ -70,7 +70,7 @@ my $parent_dir = $self->param('title_alias');
 my $title = MyBlog::RegExp->name_clean( trim($self->param('new_title')) );
 my $new_title_alias = Transliter->transliter( $title ); # Перевірити, чи існує така директорія !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 my $templ   = $self->param('template');
-$templ      = 'article' if(!$templ);
+$templ      = 'article' if(!$templ || $templ eq 'gallery'); # Змінити, коли буде можливість додавати шаблон 'gallery' !!!!!!!!!!!!!
 my $list_enable = $self->param('new_list_enable');
 $list_enable   = 'no' if(!$list_enable);
 
