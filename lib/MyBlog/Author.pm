@@ -52,7 +52,7 @@ if( $self->param('access') && scalar(keys %err_hash) <= 0 ){
 $self->redirect_to('admin');
 }
 
-#$self->redirect_to('dbaccess') unless $db;
+$self->redirect_to('dbaccess') unless $db;
 EN:
 $self->render(
 language => $language,
@@ -186,7 +186,6 @@ if( $self->param('enter') && scalar(keys %err_hash) <= 0 ){
     }
     
     my $menu = $template->get_menu( $self, $self->serve->select_struct(\@{$self->top_config->{$template}->{'levels'}}) );
-    print "\$menu \= $menu\n";
     $template->menu_rewrite( $self, $menu, [@{$self->top_config->{$template}->{'levels'}}] );
 
 }#*************
