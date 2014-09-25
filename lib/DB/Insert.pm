@@ -40,7 +40,7 @@ $self = {
                                                     parent_dir  => 'NULL',
                                                     url         => '/',
                                                     template    => 'article',
-                                                    list_enable => 'yes',
+                                                    list_enable => 'no',
                                                     queue       => 0
                                                     });
                             
