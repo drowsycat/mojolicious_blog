@@ -39,10 +39,10 @@ database => '', #DBNAME
 my($scheme, $driver, $attr_string, $attr_hash, $driver_dsn) = DBI->parse_dsn("DBI:mysql:$db_attr{'database'}:$db_attr{'host'}");
 return unless scalar(split(/\:/, $driver_dsn)) >=2;
 
-eval{
+#eval{
 $dbh = DBI->connect( "DBI:mysql:$db_attr{'database'}:$db_attr{'host'}", $db_attr{'username'}, $db_attr{'password'} );
                       #or die "Can't connect: $DBI::errstr\n";
-};
+#};
 my $err = $DBI::errstr;
 return ($dbh, $err) if $err;
 
