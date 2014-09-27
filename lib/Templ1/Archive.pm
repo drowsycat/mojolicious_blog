@@ -216,7 +216,7 @@ $message = MyBlog::AuthorizeForm->authorize_form( $self, uc($template).'/archive
 my $ref_id_name_rubric = Templ1::RubricList->rubric_list($self);
 
 $self->render(
-template => uc($template).'/archive',
+template => lc($template).'/archive',
 language => $language,
 current_page => $current_page,
 total_pages => $total_pages,
