@@ -137,7 +137,7 @@ my($archive_menu) = $db->select($table_archive_menu, ['menu'], {'url' => 'common
 my $ref_id_name_rubric = Templ1::RubricList->rubric_list($self);
 
 $self->render(
-template => uc($template).'/search_artcl',
+template => lc($template).'/search_artcl',
 language => $language,
 menu => $menu,
 archive_menu => $archive_menu,
